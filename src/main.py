@@ -11,7 +11,7 @@ ICMP_CODE = socket.getprotobyname('icmp')
 
 def dns_lookup(): pass
 def reverse_dns_lookup(): pass
-def get_lookup(host: str) -> Tuple(str,str):
+def get_lookup(host: str) -> Tuple[str,str]:
     addr = socket.gethostbyname_ex(host)[2][0]
     hostname = socket.gethostbyaddr(addr)[0]
     return (hostname, addr)
