@@ -93,8 +93,6 @@ def ping_once(host_name: str, host_addr: str, pkt_id=DEFAULT_ID, seq=1, timeout_
 				return None
 			pass
 
-
-
 def stats(timing_list: List[float], packets_lost: int):
 	rcvd_pkt = len(timing_list)
 	total_pkt = rcvd_pkt + packets_lost
@@ -115,10 +113,8 @@ def _sigint_handler(signum,frame):
 	exit(0)
 	pass
 
-#timing_list = []
-#lost_packets = 0
-
 if __name__ == '__main__':
+	# register signal handler
 	signal.signal(signal.SIGINT, _sigint_handler)
 	####    argparse
 	parser = argparse.ArgumentParser()
@@ -142,8 +138,9 @@ if __name__ == '__main__':
 	TIMEOUT_MS = args.timeout
 	####    ####    ####    ####
 
+	# look up address
 	res = get_lookup(HOSTNAME)
-	if res is None:
+	if res is None:# if not reachable, exit
 		exit(0)
 	host_name, host_addr = res
 
