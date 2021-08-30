@@ -131,7 +131,7 @@ if __name__ == '__main__':
 	
 	parser.add_argument('--timeout',
 		type=int,
-		help='time to wait for response',
+		help='time to wait for response, in ms',
 		default=1000)
 
 	args = parser.parse_args()
