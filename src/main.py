@@ -98,6 +98,8 @@ def stats(timing_list: List[float], packets_lost: int):
 	total_pkt = rcvd_pkt + packets_lost
 	percent = (packets_lost / total_pkt) * 100
 	print(f'\n{total_pkt} packets transmitted, {rcvd_pkt} received, {percent}% packet loss.')
+	if len(timing_list) == 0:
+		return
 	rtt_min = min(timing_list)
 	rtt_avg = sum(timing_list) / len(timing_list)
 	rtt_max = max(timing_list)
@@ -128,6 +130,7 @@ if __name__ == '__main__':
 		default=255)
 	
 	parser.add_argument('--timeout',
+		type=int,
 		help='time to wait for response',
 		default=1000)
 
