@@ -103,7 +103,7 @@ def stats(timing_list: List[float], packets_lost: int):
 	rtt_min = min(timing_list)
 	rtt_avg = sum(timing_list) / len(timing_list)
 	rtt_max = max(timing_list)
-	print(f'rtt min/avg/max = {rtt_min:.3f}/{rtt_avg:.3f}/{rtt_max:3f} ms.')
+	print(f'rtt min/avg/max = {rtt_min:.3f}/{rtt_avg:.3f}/{rtt_max:.3f} ms.')
 	pass
 
 def _sigint_handler(signum,frame):
