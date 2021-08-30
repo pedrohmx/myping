@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import argparse
 import time
 import socket
 import struct
@@ -21,8 +22,8 @@ def get_lookup(host: str) -> Union[Tuple[str,str], None]:
 		#print(gai)
 		return None
 	except Exception as err:
-		print('Could not reach name or service: unknown exception')
-		print(err)
+		print('Could not reach name or service.')
+		#print(err)
 		return None
 
 def checksum(data: bytes):
@@ -120,9 +121,25 @@ def _sigint_handler(signum,frame):
 if __name__ == '__main__':
 	signal.signal(signal.SIGINT, _sigint_handler)
 	####    argparse
-	HOSTNAME = 'unioeste.br'
-	COUNT = 5
-	TIMEOUT_MS = 1000
+	parser = argparse.ArgumentParser()
+	
+	parser.add_argument('destination',
+		help="DNS name or IPv4 address")
+	
+	parser.add_argument('--count','-c',
+		type=int,
+		help='number of echo requests to send',
+		default=255)
+	
+	parser.add_argument('--timeout',
+		help='time to wait for response',
+		default=1000)
+
+	args = parser.parse_args()
+
+	HOSTNAME = args.destination
+	COUNT = args.count
+	TIMEOUT_MS = args.timeout
 	####    ####    ####    ####
 
 	res = get_lookup(HOSTNAME)
